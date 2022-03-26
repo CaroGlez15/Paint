@@ -20,10 +20,22 @@ def square(start, end):
         left(90)
 
     end_fill()
-
+    
 def circle(start, end):
-    "Draw circle from start to end."
-    pass  # TODO
+    """Draw circle from start to end."""
+    up()
+    goto(start.x, start.y)
+    down()
+    speed(100)
+    begin_fill()
+
+    for count in range(60): # Lo repetirá 360 veces 
+        forward((end.x - start.x)/15) # Define el tamaño del círculo. Diámetro = diferencia de coordenada de x. 
+        if (end.y > start.y and end.x < start.x or end.y < start.y and end.x > start.x): # Según hacia donde se de click el punto final, será para donde se dibuje el circulo
+            right(6) # Rotará 90 grados hacia la derecha.
+        else:
+            left(6)
+    end_fill()
 
 def rectangle(start, end):
     "Draw rectangle from start to end."
@@ -54,6 +66,7 @@ setup(420, 420, 370, 0)
 onscreenclick(tap)
 listen()
 onkey(undo, 'u')
+onkey(lambda: color('pink'), 'P') # Se podrá usar el color rosa
 onkey(lambda: color('black'), 'K')
 onkey(lambda: color('white'), 'W')
 onkey(lambda: color('green'), 'G')
